@@ -39,7 +39,7 @@ def fetch_spot_data(ticker):
     df = stock.history(start='2024-01-01', end=END_DATE_SPOT)
     # yfinance sometimes returns timezone aware indices, let's normalize
     if df.index.tz is not None:
-        df.index = df.index.tz_convert(None)
+        df.index = df.index.tz_localize(None)
         
     df = df[['Close', 'Dividends']].copy()
     df.index = df.index.normalize()
